@@ -65,12 +65,20 @@ class LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.all(Radius.circular(24)),
               color: Colors.white
             ),
-            child: Text("立即登录",
-            style: TextStyle(
-              color: Color(0xFFFF786E),
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),),
+            child: MaterialButton (
+              child: Text("立即登录",
+                style: TextStyle(
+                  color: Color(0xFFFF786E),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),),
+            ),
+//            Text("立即登录",
+//            style: TextStyle(
+//              color: Color(0xFFFF786E),
+//              fontSize: 15,
+//              fontWeight: FontWeight.bold,
+//            ),)
           ),
           Padding(
             padding: EdgeInsets.only(top: 10),
