@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'register.dart';
 import 'scaffoldtest.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFFFF786E),
         primaryColorLight: Color(0xFFFF978F),
       ),
-      home: ScaffoldTest(),
+      home: RegisterPage(),
       debugShowCheckedModeBanner: false,
     );
   }
