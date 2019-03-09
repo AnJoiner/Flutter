@@ -118,10 +118,10 @@ class ScaffoldTestState extends State<ScaffoldTest>
 //        BottomNavigationBarItem(icon: Icon(Icons.message), title: Text('消息')),
 //        BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('我的')),],
 //
-////        selectedItemColor: colorRegular,
-////        unselectedItemColor: colorBlack,
-////        selectedFontSize: 12,
-////        unselectedFontSize: 12,
+//        selectedItemColor: colorRegular,
+//        unselectedItemColor: colorBlack,
+//        selectedFontSize: 12,
+//        unselectedFontSize: 12,
 //        currentIndex: _selectedIndex,
 //        type: BottomNavigationBarType.fixed,
 //        onTap: _onItemTapped,),
@@ -129,7 +129,7 @@ class ScaffoldTestState extends State<ScaffoldTest>
       floatingActionButton: FloatingActionButton(
         backgroundColor: colorRegular,
         onPressed: () {
-          addTime();
+          showSnackBar();
         },
         tooltip: 'Increment Counter',
         child: Icon(
@@ -137,7 +137,9 @@ class ScaffoldTestState extends State<ScaffoldTest>
           color: colorWhiter,
         ),
       ),
-//      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
+
+

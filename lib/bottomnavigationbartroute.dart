@@ -25,6 +25,9 @@ class BottomNavigationBarTestState extends State<BottomNavigationBarTest> {
     });
   }
 
+  Widget _onChangeText(int index) {
+    return new Text(content[index]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,32 +40,10 @@ class BottomNavigationBarTestState extends State<BottomNavigationBarTest> {
     return new Scaffold(
       appBar: AppBar(
         title: Text('Sample Code'),
-        leading: IconButton(
-          icon: Icon(Icons.view_quilt),
-          tooltip: 'Air it',
-          onPressed: () {},
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.playlist_play),
-            tooltip: 'Air it',
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.playlist_add),
-            tooltip: 'Restitch it',
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.playlist_add_check),
-            tooltip: 'Repair it',
-            onPressed: () {},
-          )
-        ],
       ),
       body: Center(
-        child: Text('You have pressed the button $_counter times.'),
-//          child: _onChangeText(_selectedIndex)
+//        child: Text('You have pressed the button $_counter times.'),
+          child: _onChangeText(_selectedIndex)
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("首页",)),
@@ -70,10 +51,6 @@ class BottomNavigationBarTestState extends State<BottomNavigationBarTest> {
         BottomNavigationBarItem(icon: Icon(Icons.message), title: Text('消息')),
         BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('我的')),],
 
-//        selectedItemColor: colorRegular,
-//        unselectedItemColor: colorBlack,
-//        selectedFontSize: 12,
-//        unselectedFontSize: 12,
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,),
@@ -89,7 +66,7 @@ class BottomNavigationBarTestState extends State<BottomNavigationBarTest> {
           color: colorWhiter,
         ),
       ),
-//      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
