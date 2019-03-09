@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'tabbarroute.dart';
 import 'scaffoldtest.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFFFF786E),
         primaryColorLight: Color(0xFFFF978F),
+          accentColor: Color(0xFFFFFFFF)
       ),
-      home: LoginPage(),
+      home: TabBarTest(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -8,18 +8,29 @@ class ScaffoldTest extends StatefulWidget {
   }
 }
 
-class ScaffoldTestState extends State<ScaffoldTest> {
+class ScaffoldTestState extends State<ScaffoldTest>
+    with SingleTickerProviderStateMixin {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int _counter = 0;
   int _selectedIndex = 0;
 
-  List<String> content = ["首页","商城","消息","我的"];
+
+  List<String> content = ["首页", "商城", "消息", "我的"];
+  TabController _tabController; //需要定义一个Controller
+  List tabs = ["商城", "阅读", "其他"];
 
   void addTime() {
     setState(() {
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   void showSnackBar() {
@@ -47,7 +58,7 @@ class ScaffoldTestState extends State<ScaffoldTest> {
     });
   }
 
-  Widget _onChangeText(int index){
+  Widget _onChangeText(int index) {
     return new Text(content[index]);
   }
 
@@ -63,36 +74,70 @@ class ScaffoldTestState extends State<ScaffoldTest> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Sample Code'),
+        leading: IconButton(
+          icon: Icon(Icons.view_quilt),
+          tooltip: 'Air it',
+          onPressed: () {},
+        ),
+        bottom: TabBar(tabs: tabs.map((e) => Tab(text: e)).toList(),controller: _tabController),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.playlist_play),
+            tooltip: 'Air it',
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.playlist_add),
+            tooltip: 'Restitch it',
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.playlist_add_check),
+            tooltip: 'Repair it',
+            onPressed: () {},
+          )
+        ],
       ),
-      body: Center(
+      body: TabBarView(
+        controller: _tabController,
+        children: tabs.map((e) {
+          //创建3个Tab页
+          return Container(
+            alignment: Alignment.center,
+            child: Text("the different content"),
+          );
+        }).toList(),
+      ),
+//      body: Center(
 //        child: Text('You have pressed the button $_counter times.'),
-          child: _onChangeText(_selectedIndex)
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("首页",)),
-        BottomNavigationBarItem(icon: Icon(Icons.shop), title: Text('商城',)),
-        BottomNavigationBarItem(icon: Icon(Icons.message), title: Text('消息')),
-        BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('我的')),],
-
-//        selectedItemColor: colorRegular,
-//        unselectedItemColor: colorBlack,
-//        selectedFontSize: 12,
-//        unselectedFontSize: 12,
-        currentIndex: _selectedIndex,
-        type: BottomNavigationBarType.fixed,
-        onTap: _onItemTapped,),
-//      floatingActionButton: FloatingActionButton(
-//        backgroundColor: colorRegular,
-//        onPressed: () {
-//          showBottomSheet();
-//        },
-//        tooltip: 'Increment Counter',
-//        child: Icon(
-//          Icons.add,
-//          color: colorWhiter,
-//        ),
+////          child: _onChangeText(_selectedIndex)
 //      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+//      bottomNavigationBar: BottomNavigationBar(
+//        items: [BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("首页",)),
+//        BottomNavigationBarItem(icon: Icon(Icons.shop), title: Text('商城',)),
+//        BottomNavigationBarItem(icon: Icon(Icons.message), title: Text('消息')),
+//        BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('我的')),],
+//
+////        selectedItemColor: colorRegular,
+////        unselectedItemColor: colorBlack,
+////        selectedFontSize: 12,
+////        unselectedFontSize: 12,
+//        currentIndex: _selectedIndex,
+//        type: BottomNavigationBarType.fixed,
+//        onTap: _onItemTapped,),
+
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: colorRegular,
+        onPressed: () {
+          addTime();
+        },
+        tooltip: 'Increment Counter',
+        child: Icon(
+          Icons.add,
+          color: colorWhiter,
+        ),
+      ),
+//      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

@@ -17,7 +17,11 @@ class LoginPageState extends State<LoginPage> {
 
   BorderRadius radius = BorderRadius.all(Radius.circular(21));
 
-  void add() {}
+  String username,password;
+
+  void login() {
+    print("username:"+username+"\n password:"+password);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +41,9 @@ class LoginPageState extends State<LoginPage> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(21)), color: colorInput),
               child: TextField(
+                controller: TextEditingController(
+                    text: username
+                ),
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 15,vertical: 9),
                     border: InputBorder.none,
@@ -54,6 +61,9 @@ class LoginPageState extends State<LoginPage> {
                   borderRadius: radius,
                   color: colorInput),
               child: TextField(
+                controller: TextEditingController(
+                  text: password
+                ),
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 15,vertical: 9),
                     border: InputBorder.none,
@@ -72,7 +82,7 @@ class LoginPageState extends State<LoginPage> {
               decoration: BoxDecoration (
                   borderRadius: radius,
                   color: colorWhite),
-              child: RaisedButton(onPressed: add,
+              child: RaisedButton(onPressed: login,
                   elevation: 1,
                   highlightElevation: 1,
                   textColor: colorRegular,
