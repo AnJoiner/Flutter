@@ -4,6 +4,7 @@ import 'tabbarroute.dart';
 import 'scaffoldtest.dart';
 import 'snacktest.dart';
 import 'bottomnavigationbartroute.dart';
+import 'animation.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
 
@@ -27,8 +28,12 @@ class MyApp extends StatelessWidget {
         primaryColorLight: Color(0xFFFF978F),
           accentColor: Color(0xFFFFFFFF)
       ),
-      home: LoginPage(),
+      home: AnimationPage(),
       debugShowCheckedModeBanner: false,
+        routes:{
+          "scaffold_page":(context)=>ScaffoldTest(),
+          "snack_page":(context)=> SnackTest(),
+        }
     );
   }
 }

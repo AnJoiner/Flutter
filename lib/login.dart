@@ -105,6 +105,7 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               decoration:
                   BoxDecoration(borderRadius: radius, color: colorWhite),
               child: RaisedButton(
+                padding: EdgeInsets.only(),
                   onPressed: login,
                   elevation: 1,
                   highlightElevation: 1,

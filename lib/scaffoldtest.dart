@@ -98,16 +98,18 @@ class ScaffoldTestState extends State<ScaffoldTest>
           )
         ],
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: tabs.map((e) {
-          //创建3个Tab页
-          return Container(
-            alignment: Alignment.center,
-            child: Text("the different content"),
-          );
-        }).toList(),
-      ),
+      body: Hero(tag: "login_tag", child: Container(
+        child: TabBarView(
+          controller: _tabController,
+          children: tabs.map((e) {
+            //创建3个Tab页
+            return Container(
+              alignment: Alignment.center,
+              child: Text("the different content"),
+            );
+          }).toList(),
+        ),
+      )),
 //      body: Center(
 //        child: Text('You have pressed the button $_counter times.'),
 ////          child: _onChangeText(_selectedIndex)
