@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'snacktest.dart';
 
 class AnimationPage extends StatefulWidget {
   @override
@@ -11,9 +10,9 @@ class AnimationPage extends StatefulWidget {
 
 class AnimationState extends State<AnimationPage>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  AnimationController _animationController, shackController;
 
-  Animation _animation, buttonZoomOut, fadeScreenAnimation;
+  Animation _animation, buttonZoomOut, fadeScreenAnimation, shakeAnimation;
 
   void login() {
     playAnimation();
@@ -36,6 +35,7 @@ class AnimationState extends State<AnimationPage>
     super.initState();
     _animationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 3));
+
     _animation = new Tween(begin: 320.0, end: 70.0).animate(new CurvedAnimation(
         parent: _animationController, curve: new Interval(0.0, 0.250)))
       ..addListener(() {
@@ -111,6 +111,7 @@ class AnimationState extends State<AnimationPage>
   @override
   void dispose() {
     // TODO: implement dispose
+    shackController.dispose();
     _animationController.dispose();
     super.dispose();
   }
