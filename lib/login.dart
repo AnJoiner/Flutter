@@ -20,7 +20,7 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   AnimationController _animationController;
 
-  Animation _animation;
+  Animation _buttonLengthAnimation;
 
   @override
   void initState() {
@@ -28,21 +28,20 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     super.initState();
     _animationController = new AnimationController(
         vsync: this, duration: new Duration(milliseconds: 3000));
-    _animation = new Tween<double>(
+    _buttonLengthAnimation = new Tween<double>(
       begin: 312.0,
-      end: 70.0,
-    ).animate(new CurvedAnimation(parent: _animationController,
-        curve: new Interval(0.0, 0.250)));
-  }
-
-  void login() {
-    _animationController.forward();
+      end: 75.0,
+    ).animate(new CurvedAnimation(
+        parent: _animationController, curve: new Interval(0.0, 0.250)))
+      ..addListener(() {
+        setState(() {});
+      });
   }
 
   Future<Null> playAnimate() async {
     try {
       await _animationController.forward();
-      await _animationController.reverse();
+//      await _animationController.reverse();
     } on TickerCanceled {
       // 自己处理动画取消
     }
@@ -98,27 +97,26 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 obscureText: true,
               ),
             ),
-            Container(
-              height: 42,
-              width: _animation.value,
-              margin: EdgeInsets.only(left: 24, right: 24),
-              decoration:
-                  BoxDecoration(borderRadius: radius, color: colorWhite),
-              child: RaisedButton(
-                padding: EdgeInsets.only(),
-                  onPressed: login,
-                  elevation: 1,
-                  highlightElevation: 1,
-                  textColor: colorRegular,
-                  shape: RoundedRectangleBorder(borderRadius: radius),
-                  child:_animation.value>70? new Text(
-                    "立即登录",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  ): new CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          colorRegular
-                      )
-                  )),
+            InkWell(
+              onTap: playAnimate,
+              child: Container(
+                height: 42,
+                width: _buttonLengthAnimation.value,
+                decoration:
+                    BoxDecoration(borderRadius: radius, color: colorWhite),
+                alignment: Alignment.center,
+                child: _buttonLengthAnimation.value > 75
+                    ? new Text("立即登录",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: colorRegular))
+                    : CircularProgressIndicator(
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(colorRegular),
+                        strokeWidth: 2,
+                      ),
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(top: 10),

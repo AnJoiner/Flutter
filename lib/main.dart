@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         primaryColorLight: Color(0xFFFF978F),
           accentColor: Color(0xFFFFFFFF)
       ),
-      home: AnimationPage(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
         routes:{
           "scaffold_page":(context)=>ScaffoldTest(),
