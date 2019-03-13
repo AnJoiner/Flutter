@@ -21,6 +21,10 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   AnimationController _animationController;
 
   Animation _buttonLengthAnimation;
+  TextEditingController _phoneController = new TextEditingController();
+  TextEditingController _codeController = new TextEditingController();
+
+  bool isLogin = false ;
 
   @override
   void initState() {
@@ -28,9 +32,10 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     super.initState();
     _animationController = new AnimationController(
         vsync: this, duration: new Duration(milliseconds: 3000));
+
     _buttonLengthAnimation = new Tween<double>(
       begin: 312.0,
-      end: 75.0,
+      end: 55.0,
     ).animate(new CurvedAnimation(
         parent: _animationController, curve: new Interval(0.0, 0.250)))
       ..addListener(() {
@@ -38,10 +43,20 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       });
   }
 
+  void login(){
+    String phone = _phoneController.text;
+    String code = _codeController.text;
+    if(phone == "18200131081" && code == "123456"){
+      _animationController.forward();
+    }else{
+      playAnimate();
+    }
+  }
+
   Future<Null> playAnimate() async {
     try {
       await _animationController.forward();
-//      await _animationController.reverse();
+      await _animationController.reverse();
     } on TickerCanceled {
       // 自己处理动画取消
     }
@@ -67,6 +82,7 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   borderRadius: BorderRadius.all(Radius.circular(21)),
                   color: colorInput),
               child: TextField(
+                controller: _phoneController,
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 15, vertical: 9),
@@ -84,6 +100,7 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               decoration:
                   BoxDecoration(borderRadius: radius, color: colorInput),
               child: TextField(
+                controller: _codeController,
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 15, vertical: 9),
@@ -98,7 +115,7 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               ),
             ),
             InkWell(
-              onTap: playAnimate,
+              onTap: login,
               child: Container(
                 height: 42,
                 width: _buttonLengthAnimation.value,
