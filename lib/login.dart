@@ -8,6 +8,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
+
+  final _loginKey = GlobalKey<ScaffoldState>();
+
   Color colorRegular = Color(0xFFFF786E);
   Color colorLight = Color(0xFFFF978F);
   Color colorInput = Color(0x40FFFFFF);
@@ -21,42 +24,57 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   AnimationController _animationController;
 
   Animation _buttonLengthAnimation;
+
   TextEditingController _phoneController = new TextEditingController();
   TextEditingController _codeController = new TextEditingController();
 
-  bool isLogin = false ;
+  bool isLogin = false;
+
+  void showTips(String msg) {
+    _loginKey.currentState.showSnackBar(new SnackBar(content: Text(msg,
+      style: TextStyle(color: colorRegular,fontWeight: FontWeight.bold),),
+      duration: new Duration(seconds: 3),backgroundColor: colorWhite,));
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _animationController = new AnimationController(
-        vsync: this, duration: new Duration(milliseconds: 3000));
+        vsync: this, duration: new Duration(milliseconds: 1500));
 
     _buttonLengthAnimation = new Tween<double>(
       begin: 312.0,
-      end: 55.0,
+      end: 42.0,
     ).animate(new CurvedAnimation(
         parent: _animationController, curve: new Interval(0.0, 0.250)))
       ..addListener(() {
+        if (_buttonLengthAnimation.isCompleted) {
+          if(isLogin){
+            Navigator.pushNamedAndRemoveUntil(context, "snack_page",ModalRoute.withName('login_page'));
+          }else{
+            showTips("登录失败");
+          }
+        }
         setState(() {});
       });
   }
 
-  void login(){
+  void login() {
     String phone = _phoneController.text;
     String code = _codeController.text;
-    if(phone == "18200131081" && code == "123456"){
-      _animationController.forward();
-    }else{
-      playAnimate();
-    }
+    isLogin = phone == "18200000000" && code == "123456";
+    playAnimate(isLogin);
   }
 
-  Future<Null> playAnimate() async {
+  Future<Null> playAnimate(bool isLogin) async {
     try {
-      await _animationController.forward();
-      await _animationController.reverse();
+      if (isLogin) {
+        await _animationController.forward();
+      } else {
+        await _animationController.forward();
+        await _animationController.reverse();
+      }
     } on TickerCanceled {
       // 自己处理动画取消
     }
@@ -66,6 +84,7 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
+      key: _loginKey,
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -93,10 +112,11 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 maxLines: 1,
                 cursorColor: colorRegular,
                 keyboardType: TextInputType.phone,
+                inputFormatters: [LengthLimitingTextInputFormatter(11)],
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 58, left: 24, right: 24),
+              margin: EdgeInsets.only(bottom: 30, left: 24, right: 24),
               decoration:
                   BoxDecoration(borderRadius: radius, color: colorInput),
               child: TextField(
@@ -112,11 +132,13 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 cursorColor: colorRegular,
                 keyboardType: TextInputType.number,
                 obscureText: true,
+                inputFormatters: [LengthLimitingTextInputFormatter(6)],
               ),
             ),
             InkWell(
               onTap: login,
               child: Container(
+                margin: EdgeInsets.only(top: 30),
                 height: 42,
                 width: _buttonLengthAnimation.value,
                 decoration:
