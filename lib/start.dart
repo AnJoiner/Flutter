@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'login.dart';
 
 class Start extends StatefulWidget {
@@ -10,7 +11,6 @@ class Start extends StatefulWidget {
 
 class StartState extends State<Start> with SingleTickerProviderStateMixin {
   AnimationController colorController;
-
   Animation colorAnimation;
 
   @override
@@ -19,17 +19,25 @@ class StartState extends State<Start> with SingleTickerProviderStateMixin {
     super.initState();
     colorController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 3));
-    colorAnimation =
-        new ColorTween(begin: Color(0xFFFF786E), end: Color(0xFFFFA07A))
-            .animate(colorController)
-              ..addListener(() {
-                if(colorController.isCompleted) {
-                  Navigator.pushAndRemoveUntil(context, new MaterialPageRoute(builder: (context){
-                    return LoginPage();
-                  }) , ModalRoute.withName("start_page"));
-                }
-                setState(() {});
-              });
+
+    colorAnimation = colorController
+        .drive(ColorTween(begin: Color(0xFFFF786E), end: Color(0xFFFFA07A)))
+          ..addListener(() {
+            if (colorController.isDismissed) {
+              Navigator.pushAndRemoveUntil(context,
+                  new MaterialPageRoute(builder: (context) {
+                return LoginPage();
+              }), ModalRoute.withName("start_page"));
+            }
+            setState(() {});
+          });
+
+//    colorAnimation =
+//        new ColorTween(begin: Color(0xFFFF786E), end: Color(0xFFFFA07A))
+//            .animate(colorController)
+//              ..addListener(() {
+//
+//              });
 
     playAnimation();
   }
@@ -53,12 +61,15 @@ class StartState extends State<Start> with SingleTickerProviderStateMixin {
               children: <Widget>[
                 SizedBox(
                   height: 100,
-                  child: new Image.asset(
-                    "images/logo.png",
-                    width: 50,
-                    height: 50,
-                  ),
-                ), Text(
+                  child: new SvgPicture.asset("images/logo.svg",
+                      width: 50, height: 50, semanticsLabel: 'Acme Logo'),
+//                  child: new Image.asset(
+//                    "images/logo.png",
+//                    width: 50,
+//                    height: 50,
+//                  ),
+                ),
+                Text(
                   "Hello SomeOne!",
                   style: TextStyle(fontSize: 28, color: Colors.white),
                 ),
@@ -66,7 +77,10 @@ class StartState extends State<Start> with SingleTickerProviderStateMixin {
                   padding: EdgeInsets.only(top: 10),
                   child: Wrap(
                     children: <Widget>[
-                      Icon(Icons.invert_colors,color: Colors.white,),
+                      Icon(
+                        Icons.filter_tilt_shift,
+                        color: Colors.white,
+                      ),
                       Text(
                         "Welcome to AnJoiner~ ",
                         style: TextStyle(

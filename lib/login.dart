@@ -159,10 +159,10 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             ),
             Padding(
               padding: EdgeInsets.only(top: 10),
-              child: Text(
-                "登录/注册即代表您已同意《会员协议》",
-                style: TextStyle(color: Colors.white, fontSize: 13),
-              ),
+              child:
+                Text("登录/注册即代表您已同意《会员协议》",
+                  style: TextStyle(color: Colors.white, fontSize: 13),
+                )
             ),
           ],
         ),
