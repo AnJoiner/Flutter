@@ -51,7 +51,7 @@ class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       ..addListener(() {
         if (_buttonLengthAnimation.isCompleted) {
           if(isLogin){
-            Navigator.pushNamedAndRemoveUntil(context, "snack_page",ModalRoute.withName('login_page'));
+            Navigator.pushNamedAndRemoveUntil(context, "list_page",ModalRoute.withName('login_page'));
           }else{
             showTips("登录失败");
           }

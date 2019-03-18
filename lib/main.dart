@@ -5,6 +5,7 @@ import 'scaffoldtest.dart';
 import 'snacktest.dart';
 import 'bottomnavigationbartroute.dart';
 import 'animation.dart';
+import 'list.dart';
 import 'start.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           "snack_page":(context)=> SnackTest(),
           "login_page":(context)=> LoginPage(),
           "start_page":(context)=> Start(),
+          "list_page":(context)=> ShowList(),
         }
     );
   }
