@@ -26,9 +26,6 @@ class ShowListState extends State<ShowList>{
             leading: IconButton(icon: Icon(Icons.access_alarm), onPressed: null),
             title: new Text("AnJoiner"),
           ),
-          ListView.separated(
-
-          ),
           ListTile(
             leading: IconButton(icon: Icon(Icons.access_alarm), onPressed: null),
             title: new Text("AnJoiner"),

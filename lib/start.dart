@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
 import 'login.dart';
 
 class Start extends StatefulWidget {
@@ -61,13 +61,13 @@ class StartState extends State<Start> with SingleTickerProviderStateMixin {
               children: <Widget>[
                 SizedBox(
                   height: 100,
-                  child: new SvgPicture.asset("images/logo.svg",
-                      width: 50, height: 50, semanticsLabel: 'Acme Logo'),
-//                  child: new Image.asset(
-//                    "images/logo.png",
-//                    width: 50,
-//                    height: 50,
-//                  ),
+//                  child: new SvgPicture.asset("images/logo.svg",
+//                      width: 50, height: 50, semanticsLabel: 'Acme Logo'),
+                  child: new Image.asset(
+                    "images/logo.png",
+                    width: 50,
+                    height: 50,
+                  ),
                 ),
                 Text(
                   "Hello SomeOne!",
